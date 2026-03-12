@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR Colive Luxury PG – Premium Co-Living Space</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+         :root {
+            --navy: #0a1628;
+            --navy-mid: #112240;
+            --navy-light: #1a3255;
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --gold-pale: #f5e9c8;
+            --white: #ffffff;
+            --off-white: #f9f7f2;
+            --gray: #8a9bb5;
+            --text-body: #d4dde8;
+            --transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--navy);
+            color: var(--text-body);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+        /* ─── CURSOR ─── */
+        
+        .cursor {
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+        
+        .cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.5;
+            transition: transform 0.35s ease, width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%);
+        }
+        /* ─── SCROLL PROGRESS ─── */
+        
+        #scroll-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            z-index: 10000;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        /* ─── NAV ─── */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 22px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        nav.scrolled {
+            background: rgba(10, 22, 40, 0.97);
+            backdrop-filter: blur(16px);
+            padding: 14px 6%;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+        
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.55rem;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 0.04em;
+            text-decoration: none;
+        }
+        
+        .nav-logo span {
+            color: var(--gold);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.4rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.35s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 9px 22px;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        /* ─── HERO ─── */
+        
+        #hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 22, 40, 0.92) 0%, rgba(17, 34, 64, 0.80) 60%, rgba(10, 22, 40, 0.95) 100%), url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1600&q=80') center/cover no-repeat;
+            transform: scale(1.05);
+            transition: transform 8s ease-out;
+        }
+        
+        .hero-bg.loaded {
+            transform: scale(1);
+        }
+        
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-20px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 8%;
+            max-width: 800px;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            padding: 7px 18px;
+            margin-bottom: 2rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s 0.3s forwards;
+        }
+        
+        .hero-badge i {
+            font-size: 0.65rem;
+        }
+        
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.9s 0.5s forwards;
+        }
+        
+        .hero-title strong {
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--gray);
+            max-width: 520px;
+            margin-bottom: 2.8rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeUp 0.9s 0.7s forwards;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.9s 0.9s forwards;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy);
+            padding: 14px 34px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(201, 168, 76, 0.35);
+        }
+        
+        .btn-primary span,
+        .btn-primary i {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 14px 34px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .hero-stats {
+            position: absolute;
+            bottom: 48px;
+            right: 8%;
+            display: flex;
+            gap: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.9s 1.2s forwards;
+            z-index: 2;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-top: 4px;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s 1.5s forwards;
+            z-index: 2;
+        }
+        
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollLine {
+            0%,
+            100% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scaleY(0.5);
+                opacity: 0.4;
+            }
+        }
+        
+        .scroll-text {
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ─── SECTION COMMONS ─── */
+        
+        section {
+            padding: 110px 8%;
+        }
+        
+        .section-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--gold);
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 1.4rem;
+        }
+        
+        .section-title strong {
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+        
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin-bottom: 3rem;
+        }
+        /* reveal animation */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* ─── ABOUT ─── */
+        
+        #about {
+            background: var(--navy-mid);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+        
+        .about-image-wrap {
+            position: relative;
+        }
+        
+        .about-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .about-image-frame {
+            position: absolute;
+            inset: -14px -14px 14px 14px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .about-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--gold);
+            color: var(--navy);
+            padding: 22px 28px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .about-badge span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .about-text p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.85;
+            margin-bottom: 1.4rem;
+        }
+        
+        .about-icons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+        }
+        
+        .about-icon-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 168, 76, 0.12);
+            padding: 14px 18px;
+            transition: var(--transition);
+        }
+        
+        .about-icon-item:hover {
+            border-color: rgba(201, 168, 76, 0.4);
+            background: rgba(201, 168, 76, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .about-icon-item i {
+            color: var(--gold);
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .about-icon-item span {
+            font-size: 0.82rem;
+            color: var(--text-body);
+            font-weight: 400;
+        }
+        /* ─── FACILITIES ─── */
+        
+        #facilities {
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #facilities::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.4rem;
+            margin-top: 3rem;
+        }
+        
+        .facility-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 168, 76, 0.1);
+            padding: 2rem 1.6rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: default;
+        }
+        
+        .facility-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.45s ease;
+        }
+        
+        .facility-card:hover {
+            border-color: rgba(201, 168, 76, 0.35);
+            background: rgba(201, 168, 76, 0.04);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .facility-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .facility-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(201, 168, 76, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.4rem;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .facility-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .facility-card:hover .facility-icon::before {
+            opacity: 1;
+        }
+        
+        .facility-icon i {
+            color: var(--gold);
+            font-size: 1.25rem;
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s;
+        }
+        
+        .facility-card:hover .facility-icon i {
+            color: var(--navy);
+        }
+        
+        .facility-card h3 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .facility-card p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        /* ─── ROOMS ─── */
+        
+        #rooms {
+            background: var(--navy-mid);
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .room-card {
+            background: var(--navy);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .room-card:hover {
+            border-color: rgba(201, 168, 76, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+        
+        .room-card.featured {
+            border-color: rgba(201, 168, 76, 0.4);
+        }
+        
+        .room-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s ease;
+            filter: brightness(0.85);
+        }
+        
+        .room-card:hover .room-image {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+        
+        .room-tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+        }
+        
+        .room-body {
+            padding: 2rem;
+        }
+        
+        .room-type {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .room-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1.2rem;
+        }
+        
+        .room-features {
+            list-style: none;
+            margin-bottom: 1.8rem;
+        }
+        
+        .room-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.84rem;
+            color: var(--gray);
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        
+        .room-features li i {
+            color: var(--gold);
+            font-size: 0.75rem;
+        }
+        
+        .room-footer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.12);
+        }
+        
+        .room-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .room-price small {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 300;
+        }
+        
+        .room-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 22px;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .room-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        /* ─── WHY CHOOSE ─── */
+        
+        #why {
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .why-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(80px, 14vw, 160px);
+            font-weight: 700;
+            color: rgba(201, 168, 76, 0.03);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: -0.02em;
+        }
+        
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+            position: relative;
+        }
+        
+        .why-item {
+            padding: 2.4rem 2rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .why-item::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: rgba(201, 168, 76, 0.07);
+            line-height: 1;
+            transition: color 0.4s;
+        }
+        
+        .why-item:hover::before {
+            color: rgba(201, 168, 76, 0.15);
+        }
+        
+        .why-item:hover {
+            border-color: rgba(201, 168, 76, 0.5);
+            background: rgba(201, 168, 76, 0.03);
+        }
+        
+        .why-icon {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.3rem;
+            transition: var(--transition);
+        }
+        
+        .why-item:hover .why-icon {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+        
+        .why-icon i {
+            color: var(--gold);
+            font-size: 1rem;
+            transition: color 0.4s;
+        }
+        
+        .why-item:hover .why-icon i {
+            color: var(--navy);
+        }
+        
+        .why-item h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.7rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .why-item p {
+            font-size: 0.82rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        /* ─── GALLERY (PG Photos) ─── */
+        
+        #gallery {
+            background: var(--navy-mid);
+        }
+        
+        .pg-photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .pg-photo-card {
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .pg-photo-card:hover {
+            border-color: rgba(201, 168, 76, 0.45);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+        }
+        
+        .pg-photo-wrap {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.03);
+            overflow: hidden;
+        }
+        
+        .pg-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+        
+        .pg-photo-card:hover .pg-photo-wrap img {
+            transform: scale(1.05);
+        }
+        
+        .pg-photo-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 2px dashed rgba(201, 168, 76, 0.25);
+        }
+        
+        .pg-photo-placeholder i {
+            font-size: 2.2rem;
+            color: rgba(201, 168, 76, 0.4);
+        }
+        
+        .pg-photo-placeholder span {
+            font-size: 0.88rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        .pg-photo-placeholder small {
+            font-size: 0.72rem;
+            color: rgba(138, 155, 181, 0.5);
+            font-family: monospace;
+        }
+        
+        .pg-photo-caption {
+            padding: 1.4rem 1.6rem;
+            border-top: 1px solid rgba(201, 168, 76, 0.12);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .pg-photo-label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .pg-photo-caption p {
+            font-size: 0.84rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        @media(max-width: 640px) {
+            .pg-photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ─── CONTACT ─── */
+        
+        #contact {
+            background: var(--navy);
+        }
+        
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            padding: 2.8rem;
+        }
+        
+        .contact-info-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        
+        .contact-row:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-row i {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-top: 2px;
+            width: 18px;
+        }
+        
+        .contact-row div label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 3px;
+        }
+        
+        .contact-row div span {
+            font-size: 0.9rem;
+            color: var(--text-body);
+        }
+        
+        .pricing-card {
+            background: rgba(201, 168, 76, 0.05);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            padding: 2.8rem;
+        }
+        
+        .pricing-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+        }
+        
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        
+        .price-item-left {}
+        
+        .price-item-left strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--white);
+            margin-bottom: 3px;
+        }
+        
+        .price-item-left span {
+            font-size: 0.78rem;
+            color: var(--gray);
+        }
+        
+        .price-amount {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        
+        .price-note {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-align: right;
+        }
+        
+        .whatsapp-big {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #25D366;
+            color: #fff;
+            padding: 18px 40px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: var(--transition);
+            width: 100%;
+        }
+        
+        .whatsapp-big:hover {
+            background: #1ebe5c;
+            transform: translateY(-3px);
+            box-shadow: 0 16px 50px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-big i {
+            font-size: 1.3rem;
+        }
+        /* ─── FLOATING WHATSAPP ─── */
+        
+        .wa-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 58px;
+            height: 58px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            z-index: 5000;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            animation: waPulse 3s ease-in-out infinite;
+        }
+        
+        .wa-float:hover {
+            transform: scale(1.1);
+            background: #1ebe5c;
+        }
+        
+        .wa-float i {
+            color: #fff;
+            font-size: 1.6rem;
+        }
+        
+        @keyframes waPulse {
+            0%,
+            100% {
+                box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 50px rgba(37, 211, 102, 0.7), 0 0 0 12px rgba(37, 211, 102, 0.1);
+            }
+        }
+        
+        .wa-tooltip {
+            position: absolute;
+            right: 70px;
+            background: rgba(10, 22, 40, 0.95);
+            color: var(--white);
+            font-size: 0.78rem;
+            padding: 8px 14px;
+            white-space: nowrap;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .wa-float:hover .wa-tooltip {
+            opacity: 1;
+        }
+        /* ─── FOOTER ─── */
+        
+        footer {
+            background: var(--navy-mid);
+            border-top: 1px solid rgba(201, 168, 76, 0.12);
+            padding: 70px 8% 40px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-brand .nav-logo {
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
+        }
+        
+        .footer-brand p {
+            font-size: 0.84rem;
+            color: var(--gray);
+            line-height: 1.8;
+            max-width: 300px;
+            margin-bottom: 1.6rem;
+        }
+        
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .footer-social {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--gray);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .footer-social:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.08);
+        }
+        
+        .footer-col h4 {
+            font-size: 0.75rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.4rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-col ul li a::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--gold-light);
+        }
+        
+        .footer-col ul li a:hover::before {
+            width: 20px;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            font-size: 0.78rem;
+            color: var(--gray);
+        }
+        
+        .footer-bottom a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        /* ─── MOBILE NAV ─── */
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(300px, 85vw);
+            height: 100vh;
+            background: var(--navy-mid);
+            padding: 80px 2rem 2rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 900;
+            border-left: 1px solid rgba(201, 168, 76, 0.15);
+            transition: right 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .mobile-nav.open {
+            right: 0;
+        }
+        
+        .mobile-nav a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: color 0.3s;
+            display: block;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--gold);
+        }
+        
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 22, 40, 0.8);
+            z-index: 800;
+            backdrop-filter: blur(4px);
+        }
+        
+        .overlay.open {
+            display: block;
+        }
+        /* ─── RESPONSIVE ─── */
+        
+        @media(max-width: 1024px) {
+            .about-grid,
+            .rooms-grid,
+            .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+            .about-image-wrap {
+                max-width: 500px;
+            }
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .mobile-nav {
+                display: flex;
+            }
+            .hero-stats {
+                display: none;
+            }
+        }
+        
+        @media(max-width: 640px) {
+            section {
+                padding: 80px 5%;
+            }
+            nav {
+                padding: 18px 5%;
+            }
+            nav.scrolled {
+                padding: 12px 5%;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            .about-icons {
+                grid-template-columns: 1fr;
+            }
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="scroll-bar"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <!-- NAV -->
+    <nav id="mainNav"><a href="#hero" class="nav-logo">SR <span>Colive</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul><a href="https://wa.me/919603328222?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20SR%20Colive%20Luxury%20PG." target="_blank" class="nav-cta">Enquire Now</a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+    <nav class="mobile-nav" id="mobileNav"><a href="#about">About</a><a href="#facilities">Facilities</a><a href="#rooms">Rooms</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a><a href="https://wa.me/919603328222?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20SR%20Colive%20Luxury%20PG."
+            target="_blank" style="color:#25D366;margin-top:1rem"><i class="fab fa-whatsapp"></i>Chat on WhatsApp</a></nav>
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><i class="fas fa-star"></i>Luxury Co-Living Experience </div>
+            <h1 class="hero-title">SR Colive<br><strong>Luxury PG</strong></h1>
+            <p class="hero-sub">Premium Co-Living Space with Luxury Comfort & Complete Facilities — Designed for Working Professionals & Students.</p>
+            <div class="hero-buttons"><a href="#facilities" class="btn-primary"><span>View Facilities</span><i class="fas fa-arrow-right"></i></a><a href="https://wa.me/919603328222?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20SR%20Colive%20Luxury%20PG." target="_blank"
+                    class="btn-secondary"><i class="fab fa-whatsapp"></i>Contact on WhatsApp</a></div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-num">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">13+</div>
+                <div class="stat-label">Facilities</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Hygienic</div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div><span class="scroll-text">Scroll</span></div>
+    </section>
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-grid">
+            <div class="about-image-wrap reveal-left"><img class="about-image" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80" alt="SR Colive Luxury Room" loading="lazy">
+                <div class="about-image-frame"></div>
+                <div class="about-badge"><span>5★</span>Living</div>
+            </div>
+            <div class="about-text reveal-right">
+                <div class="section-label">Our Story</div>
+                <h2 class="section-title">About <strong>SR Colive</strong><br>Luxury PG</h2>
+                <div class="divider"></div>
+                <p>SR Colive Luxury PG offers a premium co-living experience designed for comfort, convenience, and security. Our PG provides high-quality accommodation with modern facilities, hygienic homemade meals, and a safe environment with 24/7 support.</p>
+                <p>Located in a convenient area, it is ideal for professionals and students looking for a peaceful and well-managed living space. Every detail has been thoughtfully curated to make you feel at home — from your private furnished room to our
+                    communal dining experience.</p>
+                <div class="about-icons">
+                    <div class="about-icon-item"><i class="fas fa-shield-alt"></i><span>Safe & Secure</span></div>
+                    <div class="about-icon-item"><i class="fas fa-utensils"></i><span>Homemade Food</span></div>
+                    <div class="about-icon-item"><i class="fas fa-wifi"></i><span>Super Fast WiFi</span></div>
+                    <div class="about-icon-item"><i class="fas fa-clock"></i><span>24/7 Support</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FACILITIES -->
+    <section id="facilities">
+        <div style="text-align:center; max-width:560px; margin:0 auto 1rem;">
+            <div class="section-label" style="justify-content:center"><span>What We Offer</span></div>
+            <h2 class="section-title reveal">All-Inclusive <strong>Facilities</strong></h2>
+            <p style="color:var(--gray);font-size:0.9rem;" class="reveal">Everything you need for a comfortable, productive, and enjoyable stay — all included in your rent.</p>
+        </div>
+        <div class="divider" style="margin:0 auto 0;" class="reveal"></div>
+        <div class="facilities-grid">
+            <div class="facility-card reveal" style="transition-delay:0.05s">
+                <div class="facility-icon"><i class="fas fa-door-open"></i></div>
+                <h3>1 & 2 Sharing Rooms</h3>
+                <p>Choose your comfort level — private or affordable shared accommodation.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.1s">
+                <div class="facility-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Breakfast, Lunch & Dinner</h3>
+                <p>Purely homemade & hygienic meals prepared fresh daily for your health.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.15s">
+                <div class="facility-icon"><i class="fas fa-tint"></i></div>
+                <h3>RO Drinking Water</h3>
+                <p>Purified, safe, and clean RO water available round the clock.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.2s">
+                <div class="facility-icon"><i class="fas fa-bed"></i></div>
+                <h3>Personal Bed & Wardrobe</h3>
+                <p>Your own bed and wardrobe with secure lock facility for privacy.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.25s">
+                <div class="facility-icon"><i class="fas fa-chair"></i></div>
+                <h3>Dining Table</h3>
+                <p>Comfortable dining space for a pleasant meal-time experience.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.3s">
+                <div class="facility-icon"><i class="fas fa-broom"></i></div>
+                <h3>Daily Cleaning Service</h3>
+                <p>Professional daily housekeeping for a spotless living environment.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.35s">
+                <div class="facility-icon"><i class="fas fa-wifi"></i></div>
+                <h3>Super Fast WiFi</h3>
+                <p>High-speed broadband internet to keep you connected always.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.4s">
+                <div class="facility-icon"><i class="fas fa-video"></i></div>
+                <h3>24/7 CCTV Security</h3>
+                <p>Round-the-clock support team with comprehensive CCTV surveillance.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.45s">
+                <div class="facility-icon"><i class="fas fa-snowflake"></i></div>
+                <h3>Fridge & Geyser</h3>
+                <p>In-unit refrigerator and hot water geyser for daily convenience.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.5s">
+                <div class="facility-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Biometric Access</h3>
+                <p>State-of-the-art biometric entry system for maximum security.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.55s">
+                <div class="facility-icon"><i class="fas fa-bath"></i></div>
+                <h3>Attached Bathrooms</h3>
+                <p>Private attached bathrooms for added comfort and hygiene.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.6s">
+                <div class="facility-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Power Backup</h3>
+                <p>Additional power backup ensuring uninterrupted comfort and study.</p>
+            </div>
+            <div class="facility-card reveal" style="transition-delay:0.65s">
+                <div class="facility-icon"><i class="fas fa-tags"></i></div>
+                <h3>All-Inclusive Rent</h3>
+                <p>No hidden costs — all facilities bundled into a single monthly rent.</p>
+            </div>
+        </div>
+    </section>
+    <!-- ROOMS -->
+    <section id="rooms">
+        <div class="section-label reveal">Room Options</div>
+        <h2 class="section-title reveal">Choose Your <strong>Perfect Room</strong></h2>
+        <div class="divider reveal"></div>
+        <div class="rooms-grid">
+            <div class="room-card featured reveal-left">
+                <div style="overflow:hidden; position:relative"><img class="room-image" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80" alt="1 Sharing Room" loading="lazy">
+                    <div class="room-tag">Most Popular</div>
+                </div>
+                <div class="room-body">
+                    <div class="room-type">Private Suite</div>
+                    <h3 class="room-name">1 Sharing Room</h3>
+                    <ul class="room-features">
+                        <li><i class="fas fa-check"></i>Private space — fully to yourself</li>
+                        <li><i class="fas fa-check"></i>Personal bed with premium mattress</li>
+                        <li><i class="fas fa-check"></i>Wardrobe with lock facility</li>
+                        <li><i class="fas fa-check"></i>Attached private bathroom</li>
+                        <li><i class="fas fa-check"></i>Premium luxury comfort</li>
+                        <li><i class="fas fa-check"></i>All facilities included</li>
+                    </ul>
+                    <div class="room-footer">
+                        <div>
+                            <div class="room-price">₹27, 000 <small>/ month</small></div>
+                            <div style="font-size:0.72rem;color:var(--gray);margin-top:3px">All inclusive · No hidden charges</div>
+                        </div><a href="https://wa.me/919603328222?text=Hello%2C%20I%20am%20interested%20in%20the%201%20Sharing%20Room%20at%20SR%20Colive%20Luxury%20PG." target="_blank" class="room-btn">Book Now</a></div>
+                </div>
+            </div>
+            <div class="room-card reveal-right">
+                <div style="overflow:hidden; position:relative"><img class="room-image" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80" alt="2 Sharing Room" loading="lazy">
+                    <div class="room-tag">Value Pick</div>
+                </div>
+                <div class="room-body">
+                    <div class="room-type">Shared Suite</div>
+                    <h3 class="room-name">2 Sharing Room</h3>
+                    <ul class="room-features">
+                        <li><i class="fas fa-check"></i>Shared room with 1 other resident</li>
+                        <li><i class="fas fa-check"></i>Personal bed — your own space</li>
+                        <li><i class="fas fa-check"></i>Wardrobe with lock facility</li>
+                        <li><i class="fas fa-check"></i>Attached shared bathroom</li>
+                        <li><i class="fas fa-check"></i>Affordable luxury living</li>
+                        <li><i class="fas fa-check"></i>All facilities included</li>
+                    </ul>
+                    <div class="room-footer">
+                        <div>
+                            <div class="room-price">₹14, 000 <small>/ month</small></div>
+                            <div style="font-size:0.72rem;color:var(--gray);margin-top:3px">All inclusive · No hidden charges</div>
+                        </div><a href="https://wa.me/919603328222?text=Hello%2C%20I%20am%20interested%20in%20the%202%20Sharing%20Room%20at%20SR%20Colive%20Luxury%20PG." target="_blank" class="room-btn">Book Now</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- WHY CHOOSE US -->
+    <section id="why">
+        <div class="why-bg-text">LUXURY</div>
+        <div style="text-align:center; max-width:560px; margin:0 auto;">
+            <div class="section-label reveal" style="justify-content:center">Why Us</div>
+            <h2 class="section-title reveal">Why Choose <strong>SR Colive?</strong></h2>
+            <p style="color:var(--gray);font-size:0.9rem;" class="reveal">We redefine co-living with an unwavering commitment to quality, comfort, and community.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-item reveal" data-num="01">
+                <div class="why-icon"><i class="fas fa-gem"></i></div>
+                <h3>Luxury Living Experience</h3>
+                <p>Premium interiors, quality furnishings, and thoughtful amenities that go far beyond a standard PG.</p>
+            </div>
+            <div class="why-item reveal" data-num="02">
+                <div class="why-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Hygienic Homemade Food</h3>
+                <p>Fresh, healthy, home-cooked meals three times a day — just like home, only better.</p>
+            </div>
+            <div class="why-item reveal" data-num="03">
+                <div class="why-icon"><i class="fas fa-rocket"></i></div>
+                <h3>High Speed Internet</h3>
+                <p>Blazing fast WiFi for seamless work-from-home, online classes, and entertainment.</p>
+            </div>
+            <div class="why-item reveal" data-num="04">
+                <div class="why-icon"><i class="fas fa-lock"></i></div>
+                <h3>Safe & Secure Environment</h3>
+                <p>Biometric access, 24/7 CCTV, and dedicated support ensure you always feel safe.</p>
+            </div>
+            <div class="why-item reveal" data-num="05">
+                <div class="why-icon"><i class="fas fa-star"></i></div>
+                <h3>Daily Maintenance & Cleaning</h3>
+                <p>Professional housekeeping every day so your space is always immaculate.</p>
+            </div>
+            <div class="why-item reveal" data-num="06">
+                <div class="why-icon"><i class="fas fa-home"></i></div>
+                <h3>Fully Furnished Rooms</h3>
+                <p>Move in with just your bags — everything from bed to wardrobe is ready for you.</p>
+            </div>
+        </div>
+    </section>
+    <!-- GALLERY -->
+    <section id="gallery">
+        <div class="section-label reveal">Our Space</div>
+        <h2 class="section-title reveal">A Glimpse of <strong>SR Colive</strong></h2>
+        <div class="divider reveal"></div>
+        <div class="pg-photo-grid">
+            <div class="pg-photo-card reveal-left">
+                <div class="pg-photo-wrap"><img src="pg_image.jpeg" alt="SR Colive PG - Photo 1">
+                    <div class="pg-photo-placeholder"><i class="fas fa-camera"></i><span>Add your PG photo here</span><small>Replace src="YOUR_IMAGE_1.jpg"</small></div>
+                </div>
+                <div class="pg-photo-caption"><span class="pg-photo-label">SR Colive Luxury PG</span>
+                    <p>Your premium co-living space — comfortable, clean, and fully furnished.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-label reveal">Get In Touch</div>
+        <h2 class="section-title reveal">Book Your <strong>Stay Today</strong></h2>
+        <div class="divider reveal"></div>
+        <div class="contact-wrap">
+            <div class="reveal-left">
+                <div class="contact-info-card">
+                    <h3><i class="fas fa-building" style="color:var(--gold);margin-right:10px"></i>SR Colive Luxury PG</h3>
+                    <div class="contact-row"><i class="fas fa-phone"></i>
+                        <div><label>Phone / WhatsApp</label><span>+91 96033 28222</span></div>
+                    </div>
+                    <div class="contact-row"><i class="fab fa-whatsapp"></i>
+                        <div><label>WhatsApp Direct</label><span>wa.me/919603328222</span></div>
+                    </div>
+                    <div class="contact-row"><i class="fas fa-clock"></i>
+                        <div><label>Support Hours</label><span>24/7 Always Available</span></div>
+                    </div>
+                    <div class="contact-row"><i class="fas fa-users"></i>
+                        <div><label>For</label><span>Working Professionals & Students</span></div>
+                    </div>
+                    <div class="contact-row"><i class="fas fa-check-circle"></i>
+                        <div><label>Included</label><span>All facilities included in rent</span></div>
+                    </div><a href="https://wa.me/919603328222?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20SR%20Colive%20Luxury%20PG." target="_blank" class="whatsapp-big"><i class="fab fa-whatsapp"></i>Contact Owner on WhatsApp </a></div>
+            </div>
+            <div class="reveal-right">
+                <div class="pricing-card">
+                    <h3><i class="fas fa-tag" style="color:var(--gold);margin-right:10px"></i>Room Pricing</h3>
+                    <div class="price-item">
+                        <div class="price-item-left"><strong>1 Sharing Room</strong><span>Private room · Attached bathroom · All inclusive</span></div>
+                        <div>
+                            <div class="price-amount">₹27, 000
+                            </div>
+                            <div class="price-note">/ month</div>
+                        </div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-item-left"><strong>2 Sharing Room</strong><span>Shared room · Attached bathroom · All inclusive</span></div>
+                        <div>
+                            <div class="price-amount">₹14, 000
+                            </div>
+                            <div class="price-note">/ month</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:2rem;padding:1.5rem;border:1px solid rgba(201,168,76,0.2);background:rgba(201,168,76,0.04)">
+                        <div style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem">What's Included</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>3 Meals / Day</div>
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>Super Fast WiFi</div>
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>Daily Cleaning</div>
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>RO Water</div>
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>24/7 Security</div>
+                            <div style="font-size:0.8rem;color:var(--gray);display:flex;align-items:center;gap:6px"><i class="fas fa-check" style="color:var(--gold);font-size:0.65rem"></i>Power Backup</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand"><a href="#hero" class="nav-logo">SR <span>Colive</span>Luxury PG</a>
+                <p>A premium co-living space designed for comfort, convenience, and community. Your home away from home in the city.</p>
+                <div class="footer-socials"><a href="https://wa.me/919603328222" target="_blank" class="footer-social"><i class="fab fa-whatsapp"></i></a><a href="#" class="footer-social"><i class="fab fa-instagram"></i></a><a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#facilities">Facilities</a></li>
+                    <li><a href="#rooms">Room Options</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="https://wa.me/919603328222" target="_blank"><i class="fab fa-whatsapp"></i>+91 96033 28222</a></li>
+                    <li><a href="#rooms">1 Sharing – ₹27,
+000/mo</a></li>
+                    <li><a href="#rooms">2 Sharing – ₹14,
+000/mo</a></li>
+                    <li><a href="#why">24/7 Support Available</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom"><span>© 2026 SR Colive Luxury PG. All Rights Reserved.</span><span>Built with <i class="fas fa-heart" style="color:var(--gold)"></i>for Luxury Living</span></div>
+    </footer>
+    <!-- FLOATING WHATSAPP --><a href="https://wa.me/919603328222?text=Hello%2C%20I%20would%20like%20to%20know%20more%20about%20SR%20Colive%20Luxury%20PG." target="_blank" class="wa-float" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i><div class="wa-tooltip">Chat with Owner</div></a>
+    <script>
+        // ─── CURSOR ───
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0,
+            my = 0,
+            rx = 0,
+            ry = 0;
+        document.addEventListener('mousemove',
+            e => {
+                mx = e.clientX;
+                my = e.clientY;
+                cursor.style.left = mx + 'px';
+                cursor.style.top = my + 'px';
+            }
+
+        );
+
+        function animRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px';
+            ring.style.top = ry + 'px';
+            requestAnimationFrame(animRing);
+        }
+
+        animRing();
+        document.querySelectorAll('a,button,.facility-card,.room-card,.gallery-item,.why-item').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+                    ring.style.width = '60px';
+                    ring.style.height = '60px';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+                    ring.style.width = '36px';
+                    ring.style.height = '36px';
+                });
+            }
+
+        );
+        // ─── SCROLL PROGRESS ───
+        window.addEventListener('scroll',
+            () => {
+                const h = document.documentElement.scrollHeight - window.innerHeight;
+                document.getElementById('scroll-bar').style.width = (window.scrollY / h * 100) + '%';
+            }
+
+        );
+        // ─── NAV SCROLL ───
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll',
+            () => {
+                nav.classList.toggle('scrolled', window.scrollY > 60);
+            }
+
+        );
+        // ─── HERO BG ───
+        setTimeout(() => document.getElementById('heroBg').classList.add('loaded'),
+            100);
+        // ─── PARTICLES ───
+        const pc = document.getElementById('particles');
+        for (let i = 0; i < 25; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+            p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            pc.appendChild(p);
+        }
+
+        // ─── HAMBURGER ───
+        const ham = document.getElementById('hamburger');
+        const mNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu(open) {
+            mNav.classList.toggle('open',
+                open);
+            overlay.classList.toggle('open',
+                open);
+            ham.classList.toggle('active',
+                open);
+        }
+
+        ham.addEventListener('click',
+            () => toggleMenu(!mNav.classList.contains('open')));
+        overlay.addEventListener('click',
+            () => toggleMenu(false));
+        mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+        // ─── SCROLL REVEAL ───
+        const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        observer.unobserve(e.target);
+                    }
+                });
+            }
+
+            , {
+                threshold: 0.12,
+                rootMargin: '0px 0px -40px 0px'
+            }
+
+        );
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el, i) => {
+                if (!el.style.transitionDelay) el.style.transitionDelay = (i % 8 * 0.07) + 's';
+                observer.observe(el);
+            }
+
+        );
+        // ─── SMOOTH SCROLL FOR NAV ───
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', e => {
+                    const id = a.getAttribute('href');
+                    if (id.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(id);
+                        if (target) target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+        );
+        // ─── COUNTER ANIMATION ───
+        function animateCounters() {
+            document.querySelectorAll('.stat-num').forEach(el => {
+                const text = el.textContent;
+                const num = parseFloat(text);
+                if (!isNaN(num) && !el.dataset.animated) {
+                    el.dataset.animated = 1;
+                    let start = 0,
+                        end = num,
+                        duration = 1500;
+                    const step = (timestamp) => {
+                        if (!start) start = timestamp;
+                        const progress = Math.min((timestamp - start) / duration, 1);
+                        const ease = 1 - Math.pow(1 - progress, 3);
+                        el.textContent = text.replace(num, Math.round(ease * end));
+                        if (progress < 1) requestAnimationFrame(step);
+                        else el.textContent = text;
+                    };
+                    requestAnimationFrame(step);
+                }
+            });
+        }
+
+        const statsObs = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    animateCounters();
+                    statsObs.disconnect();
+                }
+            }
+
+            , {
+                threshold: 0.5
+            }
+
+        );
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) statsObs.observe(heroStats);
+    </script>
+</body>
+
+</html>
